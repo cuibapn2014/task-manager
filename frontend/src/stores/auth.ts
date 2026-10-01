@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { authApi } from '@/api/authApi'
+import { useTaskStore } from '@/stores/tasks'
 import type { User } from '@/types/api'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -25,6 +26,10 @@ export const useAuthStore = defineStore('auth', () => {
     token.value = null
     user.value  = null
     localStorage.removeItem('token')
+    
+    // Clear task filter state on logout
+    const taskStore = useTaskStore()
+    taskStore.clearFilters()
   }
 
   async function login(email: string, password: string): Promise<void> {

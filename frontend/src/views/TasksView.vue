@@ -206,12 +206,12 @@ import type { Task, TaskStatus, User } from '@/types/api'
 const auth      = useAuthStore()
 const taskStore = useTaskStore()
 
-// --- State ---
-const searchQuery       = ref('')
+// --- State (initialized from persistent store) ---
+const searchQuery       = ref(taskStore.filters.search)
 const debouncedSearch   = useDebounce(searchQuery, 300)
-const statusFilter      = ref<TaskStatus | ''>('')
-const assignedToFilter = ref<number | undefined>(undefined)
-const page              = ref(1)
+const statusFilter      = ref<TaskStatus | ''>(taskStore.filters.status)
+const assignedToFilter = ref<number | undefined>(taskStore.filters.assignedTo)
+const page              = ref(taskStore.filters.page)
 
 const assigneeOptions   = ref<User[]>([])
 
@@ -238,11 +238,26 @@ onMounted(async () => {
 
 // --- Watchers for debounced search and filters (reset page on change) ---
 watch([debouncedSearch, statusFilter, assignedToFilter], () => {
-  page.value = 1
-  loadTasks()
+  if (page.value !== 1) {
+    page.value = 1
+  } else {
+    taskStore.setFilters({
+      search: debouncedSearch.value,
+      status: statusFilter.value,
+      assignedTo: assignedToFilter.value,
+      page: 1,
+    })
+    loadTasks()
+  }
 })
 
-watch(page, () => {
+watch(page, (newPage) => {
+  taskStore.setFilters({
+    search: debouncedSearch.value,
+    status: statusFilter.value,
+    assignedTo: assignedToFilter.value,
+    page: newPage,
+  })
   loadTasks()
 })
 

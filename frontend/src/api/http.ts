@@ -38,6 +38,7 @@ http.interceptors.response.use(
       window.location.pathname !== '/login'
     ) {
       localStorage.removeItem('token')
+      localStorage.removeItem('task_filters')
       // Avoid circular import: navigate directly instead of using the router.
       window.location.href = '/login'
     }
