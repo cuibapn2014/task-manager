@@ -31,8 +31,7 @@ project-root/
 │   │   ├── types/            # TypeScript interfaces & enums matching API
 │   │   └── views/            # LoginView, TasksView
 │   └── package.json
-├── README.md                 # Project setup & architecture overview
-└── ANSWERS.md                # System design, performance & security deep-dive
+└── README.md                 # Project setup & architecture overview
 ```
 
 ---
@@ -82,8 +81,8 @@ npm run dev
 | Role  | Email | Password | Permissions |
 |-------|-------|----------|-------------|
 | Admin | `admin@example.com` | `password` | Manage all tasks, assign to any user |
-| User  | `user1@example.com` | `password` | Manage only tasks assigned to self |
-| User  | `user2@example.com` | `password` | Manage only tasks assigned to self |
+| Alice  | `alice@example.com` | `password` | Manage only tasks assigned to self |
+| Bob  | `bob@example.com` | `password` | Manage only tasks assigned to self |
 
 ### Running Backend Tests
 
