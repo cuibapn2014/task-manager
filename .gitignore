@@ -1,0 +1,21 @@
+# Backend
+backend/.env
+backend/vendor/
+backend/storage/logs/*.log
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+backend/bootstrap/cache/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.md
